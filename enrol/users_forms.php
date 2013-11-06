@@ -203,10 +203,12 @@ class enrol_users_filter_form
 
         // Submit button does not use add_action_buttons because that adds
         // another fieldset which causes the CSS style to break in an unfixable
-        // way due to fieldset quirks.
+        // way due to fieldset quirks. 
         $group = array();
         $group[] = $mform->createElement('submit', 'submitbutton', get_string('filter'));
         $group[] = $mform->createElement('submit', 'resetbutton', get_string('reset'));
+        // Add download button
+        $group[] = $mform->createElement('submit', 'downloadbutton', get_string('download'));
         $mform->addGroup($group, 'buttons', '', ' ', false);
 
         // Add hidden fields required by page.
