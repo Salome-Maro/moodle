@@ -213,9 +213,7 @@ if(empty($page)){
     $page = 0;
 }
 
-if(empty($perpage)){
-    $perpage = 20;
-}
+$perpage = 20;
 
 $filterform = new enrol_users_filter_form('users.php', array('manager' => $manager, 'id' => $id),
         'get', '', array('id' => 'filterform'));
@@ -223,8 +221,12 @@ $filterform->set_data(array('search' => $search, 'ifilter' => $filter, 'role' =>
 
 $table->set_fields($fields, $renderer);
 $canassign = has_capability('moodle/role:assign', $manager->get_context());
+$table->sort = "lastname";
+$table->sortdirection = "ASC";
+$table->page = $page;
+$table->perpage = $perpage;
+//$users = $manager->get_users_for_display($manager, "lastname", "ASC", $page, $perpage);
 $users = $manager->get_users_for_display($manager, $table->sort, $table->sortdirection, $table->page, $table->perpage);
-//$users = $manager->get_users_for_display($manager, $table->sort, $table->sortdirection, $table->page, $table->perpage);
 foreach ($users as $userid=>&$user) {
     $user['picture'] = $OUTPUT->render($user['picture']);
     $user['role'] = $renderer->user_roles_and_actions($userid, $user['roles'], $manager->get_assignable_roles(), $canassign, $PAGE->url);
