@@ -28,8 +28,9 @@ $squery = mysql_query($query);
 if((mysql_num_rows($squery) != 0) && ($s != "")){
 	while($sLookup = mysql_fetch_array($squery)){
 		$displayName = $sLookup["firstname"];
-		//$lastName= $sLookup["lastname"];
-		$output .= '<li  style ="border:1px solid #f2f2f2; list-style: none; background-color:EBEBEB; padding:6px;" onclick="sendToSearch(\'' . $displayName .'\')"> <a href = "#">' . $displayName .'</a></li>';
+		$lastName= $sLookup["lastname"];
+		$lastName= substr($lastName,0,-1);
+		$output .= '<li  style ="border:1px solid #f2f2f2; list-style: none; background-color:EBEBEB; padding:6px;" onclick="sendToSearch(\'' . $displayName ." " .$lastName.'\')"> <a href = "#">' .$displayName. " " .$lastName.'</a></li>';
 	}
 }
 
