@@ -31,10 +31,11 @@ require_once("$CFG->dirroot/group/lib.php");
 $id      = required_param('id', PARAM_INT); // course id
 $action  = optional_param('action', '', PARAM_ALPHANUMEXT);
 $filter  = optional_param('ifilter', 0, PARAM_INT);
-$search  = optional_param('search', '', PARAM_RAW);
+$search  = optional_param('search','', PARAM_RAW);
 $role    = optional_param('role', 0, PARAM_INT);
 $fgroup  = optional_param('filtergroup', 0, PARAM_INT);
 $status  = optional_param('status', -1, PARAM_INT);
+
 
 // When users reset the form, redirect back to first page without other params.
 if (optional_param('resetbutton', '', PARAM_RAW) !== '') {
@@ -202,6 +203,7 @@ if (!has_capability('moodle/course:viewhiddenuserfields', $context)) {
         unset($fields['group']);
     }
 }
+
 
 $filterform = new enrol_users_filter_form('users.php', array('manager' => $manager, 'id' => $id),
         'get', '', array('id' => 'filterform'));

@@ -21,10 +21,14 @@
  * @copyright  2010 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
 require_once("$CFG->libdir/formslib.php");
+require_once(dirname(__FILE__) . '/../config.php');
+
+$PAGE->set_context(get_context_instance(CONTEXT_SYSTEM));
+
+
 
 class enrol_users_assign_form extends moodleform {
     function definition() {
@@ -135,18 +139,36 @@ class enrol_users_addmember_form extends moodleform {
 /**
  * Form that lets users filter the enrolled user list.
  */
-class enrol_users_filter_form extends moodleform {
+class enrol_users_filter_form
+ extends moodleform {
     function definition() {
         global $CFG, $DB;
 
         $manager = $this->_customdata['manager'];
 
         $mform = $this->_form;
+ ?>       
+        <html>
+        <head>
+        <script SRC='livesearch.js'></script>
+        </head>
+        <body>
+        <form id="quick-search" action="../search" method="post" style = "position:absolute; top:145px; left: 232px; z-index:1;">
+        <ul id="searchResults">
+        </ul>
+        </form>
+        </body>
+        </html>
+<?php 
 
-        // Text search box.
-        $mform->addElement('text', 'search', get_string('search'));
-        $mform->setType('search', PARAM_RAW);
-
+        // Text search box. 
+	   $showResults =array( 'onkeyup' =>'liveSearch()', 'id'=>'qsearch');
+       $mform->addElement('text','search', get_string('search'),$showResults);
+       $mform->setType('search', PARAM_RAW);
+      // echo html::start_tag('ul', array('id'=>'searchResults2'));
+       //echo html::end_tag('ul');       
+             
+        
         // Filter by enrolment plugin type.
         $mform->addElement('select', 'ifilter', get_string('enrolmentinstances', 'enrol'),
                 array(0 => get_string('all')) + (array)$manager->get_enrolment_instance_names());
@@ -192,3 +214,5 @@ class enrol_users_filter_form extends moodleform {
         $mform->setType('id', PARAM_INT);
     }
 }
+    
+    
