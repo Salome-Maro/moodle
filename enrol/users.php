@@ -27,6 +27,10 @@ require_once("$CFG->dirroot/enrol/locallib.php");
 require_once("$CFG->dirroot/enrol/users_forms.php");
 require_once("$CFG->dirroot/enrol/renderer.php");
 require_once("$CFG->dirroot/group/lib.php");
+require_once($CFG->libdir.'/adminlib.php');
+require_once($CFG->libdir.'/authlib.php');
+require_once($CFG->dirroot.'/user/filters/lib.php');
+require_once($CFG->dirroot.'/user/lib.php');
 
 $id      = required_param('id', PARAM_INT); // course id
 $action  = optional_param('action', '', PARAM_ALPHANUMEXT);
@@ -35,6 +39,8 @@ $search  = optional_param('search', '', PARAM_RAW);
 $role    = optional_param('role', 0, PARAM_INT);
 $fgroup  = optional_param('filtergroup', 0, PARAM_INT);
 $status  = optional_param('status', -1, PARAM_INT);
+$page    = optional_param('page', 0, PARAM_INT);
+$perpage = optional_param('perpage', 20, PARAM_INT);        // how many per page
 
 // When users reset the form, redirect back to first page without other params.
 if (optional_param('resetbutton', '', PARAM_RAW) !== '') {
@@ -220,10 +226,15 @@ foreach ($users as $userid=>&$user) {
 $table->set_total_users($manager->get_total_users());
 $table->set_users($users);
 
+$baseurl = new moodle_url('/enrol/users.php', array('id' => $id, 'perpage' => $perpage));
+$usercount = count($users);
+
 $PAGE->set_title($PAGE->course->fullname.': '.get_string('totalenrolledusers', 'enrol', $manager->get_total_users()));
 $PAGE->set_heading($PAGE->title);
 
 echo $OUTPUT->header();
+echo $OUTPUT->paging_bar($usercount, $page, $perpage, $baseurl);
 echo $OUTPUT->heading(get_string('enrolledusers', 'enrol'));
 echo $renderer->render_course_enrolment_users_table($table, $filterform);
+echo $OUTPUT->paging_bar($usercount, $page, $perpage, $baseurl);
 echo $OUTPUT->footer();
