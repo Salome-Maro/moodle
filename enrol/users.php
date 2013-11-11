@@ -48,6 +48,11 @@ if (optional_param('resetbutton', '', PARAM_RAW) !== '') {
     redirect('users.php?id=' . $id);
 }
 
+//Download button
+if (optional_param('downloadbutton', '', PARAM_RAW) !== '') {
+	redirect('download.php');
+}
+
 $course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
 $context = context_course::instance($course->id, MUST_EXIST);
 
