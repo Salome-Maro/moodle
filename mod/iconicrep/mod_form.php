@@ -26,6 +26,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+include('layout.php');
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
@@ -60,25 +61,59 @@ class mod_iconicrep_mod_form extends moodleform_mod {
         // Adding the standard "intro" and "introformat" fields
         $this->add_intro_editor();
 
+        ?>
+                <style>
+                <?php include 'iconicrep.css'; ?>
+                </style>
+        
+        <?php
+        	               
         //-------------------------------------------------------------------------------
         // Adding the rest of iconicrep settings, spreeading all them into this fieldset
         // or adding more fieldsets ('header' elements) if needed for better logic
         $mform->addElement('header', 'iconchoose', get_string('iconchoose', 'iconicrep'));
-       	html_writer::start_tag('div', array('class'=>'container'));
-        html_writer::start_tag('img', array('src'=>'./pix/icon.png'));
         
-        $mform->addElement('checkbox', 'iconassignment', get_string('iconassignment', 'iconicrep'));
-        $mform->addElement('checkbox', 'iconchat', get_string('iconchat', 'iconicrep'));
-        $mform->addElement('checkbox', 'iconchoice', get_string('iconchoice', 'iconicrep'));
-        $mform->addElement('checkbox', 'iconforum', get_string('iconforum', 'iconicrep'));
-        $mform->addElement('checkbox', 'iconlesson', get_string('iconlesson', 'iconicrep'));
-        html_writer::end_tag('img');
+        $mform->addElement('html', '<ul class="choose-icons">');
+        $mform->addElement('html','<li class="choose-icon assignment">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="assignment">');
+        $mform->addElement('html','<label for="assignment"> Assignment </ label>');
+        $mform->addElement('html','</ Li>');
+        
+        $mform->addElement('html','<li class="choose-icon chat">');
+        $mform->addElement('html', '<input type="checkbox" name="choose-icons" id="chat">');
+        $mform->addElement('html','<label for="chat"> Chat </ label>');
+        $mform->addElement('html','</ Li>');
+        
+        $mform->addElement('html','<li class="choose-icon choice">');
+        $mform->addElement('html', '<input type="checkbox" name="choose-icons" id="choice">');
+        $mform->addElement('html','<label for="choice"> Choice </ label>');
+        $mform->addElement('html','</ Li>');
+        
+        $mform->addElement('html','<li class="choose-icon forum">');
+        $mform->addElement('html', '<input type="checkbox" name="choose-icons" id="forum">');
+        $mform->addElement('html','<label for="forum"> Forum </ label>');
+        $mform->addElement('html','</ Li>');
+        
+        $mform->addElement('html','<li class="choose-icon lesson">');
+        $mform->addElement('html', '<input type="checkbox" name="choose-icons" id="lesson">');
+        $mform->addElement('html','<label for="lesson"> Lesson </ label>');
+        $mform->addElement('html','</ Li>');
+        	
+        
+        $mform->addElement('html','<li class="choose-icon quiz">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="quiz">');
+        $mform->addElement('html','<label for="quiz"> Quiz </ label>');
+        $mform->addElement('html','</ Li>');
+        	
+        $mform->addElement('html','</ ul>');
 
-        html_writer::end_tag('div');
         
 
         $mform->addElement('header', 'iconicrepfieldset', get_string('iconicrepfieldset', 'iconicrep'));
         $mform->addElement('static', 'label2', 'iconicrepsetting2', 'Your iconicrep fields go here. Replace me!');
+  
+      	
+      	
 
         //-------------------------------------------------------------------------------
         // add standard elements, common to all modules
@@ -88,3 +123,5 @@ class mod_iconicrep_mod_form extends moodleform_mod {
         $this->add_action_buttons();
     }
 }
+
+?>

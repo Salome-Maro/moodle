@@ -1,4 +1,72 @@
-@CHARSET "ISO-8859-1";
+. choose-icons  { 
+  list-style :  none ; 
+  margin :  0 , 
+  padding :  0 ; 
+}
 
-.container { position: relative; width: 100px; height: 100px; float: left; margin-left: 10px; }
-.checkbox { position: relative; bottom: 0px; right: 0px; }
+. choose-icons : after  { 
+  content :  "" ; 
+  clear :  Both ; 
+}
+
+.choose-icon {
+  border: 1px solid #ccc;
+  margin-left:5px;
+  box-sizing: border-box;
+  float: left;
+  height: 70px;
+  position: relative;
+  width: 120px;
+}
+
+. choose-icon  +  . choose-icon  { 
+  margin-left :  35px ; 
+}
+
+.choose-icon label {
+  background: no-repeat center center;
+  bottom: 1px;
+  cursor: pointer; 
+  left: 15px;
+  position: absolute;
+  right: 1px;
+  text-indent:5%;
+  top: 3px;
+  white-space: nowrap;
+}
+
+.forum label {
+  background-image:url("http://localhost/moodle/mod/forum/pix/icon.png");
+}
+
+.assignment label {
+  background-image: url("http://localhost/moodle/mod/assignment/pix/icon.png");
+}
+
+.chat label {
+  background-image: url("http://localhost/moodle/mod/chat/pix/icon.png");
+}
+
+.choice label {
+  background-image: url("http://localhost/moodle/mod/choice/pix/icon.png");
+}
+
+
+.lesson label {
+  background-image: url("http://localhost/moodle/mod/lesson/pix/icon.png");
+}
+
+.quiz label {
+  background-image: url("http://localhost/moodle/mod/quiz/pix/icon.png");
+}
+
+
+
+
+. choose-icon-  input : focus  +  label  { 
+  outline :  2px  dotted  # 21b4d0 ; 
+}
+
+. choose-icon-  input : checked  +  label  { 
+  outline :  4px  solid  # 21b4d0 ; 
+}
