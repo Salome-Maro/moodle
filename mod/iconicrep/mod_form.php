@@ -88,33 +88,90 @@ class mod_iconicrep_mod_form extends moodleform_mod {
         $mform->addElement('html', '<input type="checkbox" name="choose-icons" id="choice">');
         $mform->addElement('html','<label for="choice"> Choice </ label>');
         $mform->addElement('html','</ Li>');
-        
+       
         $mform->addElement('html','<li class="choose-icon forum">');
         $mform->addElement('html', '<input type="checkbox" name="choose-icons" id="forum">');
         $mform->addElement('html','<label for="forum"> Forum </ label>');
+        $mform->addElement('html','</ Li>');
+        
+        $mform->addElement('html','<li class="choose-icon database">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="database">');
+        $mform->addElement('html','<label for="database"> Database </ label>');
+        $mform->addElement('html','</ Li>');
+        
+        $mform->addElement('html','<li class="choose-icon externalTool">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="externalTool">');
+        $mform->addElement('html','<label for="externalTool"> ExternalTool </ label>');
+        $mform->addElement('html','</ Li>');
+        
+        $mform->addElement('html','<li class="choose-icon glossary">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="glossary">');
+        $mform->addElement('html','<label for="glossary"> Glossary </ label>');
         $mform->addElement('html','</ Li>');
         
         $mform->addElement('html','<li class="choose-icon lesson">');
         $mform->addElement('html', '<input type="checkbox" name="choose-icons" id="lesson">');
         $mform->addElement('html','<label for="lesson"> Lesson </ label>');
         $mform->addElement('html','</ Li>');
-        	
-        
+        	       
         $mform->addElement('html','<li class="choose-icon quiz">');
         $mform->addElement('html','<input type="checkbox" name="choose-icons" id="quiz">');
         $mform->addElement('html','<label for="quiz"> Quiz </ label>');
         $mform->addElement('html','</ Li>');
-        	
-        $mform->addElement('html','</ ul>');
 
+        $mform->addElement('html','<li class="choose-icon scorm">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="scorm">');
+        $mform->addElement('html','<label for="scorm"> Scorm </ label>');
+        $mform->addElement('html','</ Li>');
+
+        $mform->addElement('html','<li class="choose-icon survey">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="survey">');
+        $mform->addElement('html','<label for="survey"> Survey </ label>');
+        $mform->addElement('html','</ Li>');
         
+        $mform->addElement('html','<li class="choose-icon wiki">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="wiki">');
+        $mform->addElement('html','<label for="wiki"> Wiki </ label>');
+        $mform->addElement('html','</ Li>');
+        
+        $mform->addElement('html','<li class="choose-icon workshop">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="workshop">');
+        $mform->addElement('html','<label for="workshop"> Workshop </ label>');
+        $mform->addElement('html','</ Li>');
+        
+        $mform->addElement('html','<li class="choose-icon book">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="book">');
+        $mform->addElement('html','<label for="book"> Book </ label>');
+        $mform->addElement('html','</ Li>');
+        
+        $mform->addElement('html','<li class="choose-icon file">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="file">');
+        $mform->addElement('html','<label for="file"> File </ label>');
+        $mform->addElement('html','</ Li>');
+       
+        $mform->addElement('html','<li class="choose-icon ims">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="ims">');
+        $mform->addElement('html','<label for="ims"> IMS </ label>');
+        $mform->addElement('html','</ Li>');
+        
+        $mform->addElement('html','<li class="choose-icon label">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="label">');
+        $mform->addElement('html','<label for="label"> Label </ label>');
+        $mform->addElement('html','</ Li>');
+    
+        $mform->addElement('html','<li class="choose-icon url">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="url">');
+        $mform->addElement('html','<label for="url"> URL </ label>');
+        $mform->addElement('html','</ Li>');
 
-        $mform->addElement('header', 'iconicrepfieldset', get_string('iconicrepfieldset', 'iconicrep'));
-        $mform->addElement('static', 'label2', 'iconicrepsetting2', 'Your iconicrep fields go here. Replace me!');
-  
-      	
-      	
-
+        $mform->addElement('html','<li class="choose-icon page1">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons" id="page1">');
+        $mform->addElement('html','<label for="page1"> Page </ label>');
+        $mform->addElement('html','</ Li>');
+        
+        $mform->addElement('html','</ ul>');
+   	
+      
         //-------------------------------------------------------------------------------
         // add standard elements, common to all modules
         $this->standard_coursemodule_elements();

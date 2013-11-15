@@ -62,18 +62,16 @@ if ($hassiteconfig
     $languages = array();
     $languages[''] = new lang_string('forceno');
     $languages += get_string_manager()->get_list_of_translations();
+    
     $temp->add(new admin_setting_configselect('moodlecourse/lang', new lang_string('forcelanguage'), '', key($languages),
         $languages));
-
     $options = range(0, 10);
     $temp->add(new admin_setting_configselect('moodlecourse/newsitems', new lang_string('newsitemsnumber'),
-        new lang_string('coursehelpnewsitemsnumber'), 5, $options));
+        new lang_string('coursehelpnewsitemsnumber'), 5, $options)); 
     $temp->add(new admin_setting_configselect('moodlecourse/showgrades', new lang_string('showgrades'),
-        new lang_string('coursehelpshowgrades'), 1, array(0 => new lang_string('no'), 1 => new lang_string('yes'))));
+        new lang_string('coursehelpshowgrades'), 1, array(0 => new lang_string('no'), 1 => new lang_string('yes'))));  
     $temp->add(new admin_setting_configselect('moodlecourse/showreports', new lang_string('showreports'), '', 0,
-        array(0 => new lang_string('no'), 1 => new lang_string('yes'))));
-
-
+        array(0 => new lang_string('no'), 1 => new lang_string('yes'))));   
     // Files and uploads.
     $temp->add(new admin_setting_heading('filesanduploadshdr', new lang_string('filesanduploads'), ''));
 

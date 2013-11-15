@@ -59,9 +59,9 @@ $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_context($context);
 
 // other things you may want to set - remove if not needed
-//$PAGE->set_cacheable(false);
-//$PAGE->set_focuscontrol('some-html-id');
-//$PAGE->add_body_class('iconicrep-'.$somevar);
+$PAGE->set_cacheable(false);
+$PAGE->set_focuscontrol('some-html-id');
+$PAGE->add_body_class('iconicrep-'.$somevar);
 
 // Output starts here
 echo $OUTPUT->header();
@@ -71,7 +71,8 @@ if ($iconicrep->intro) { // Conditions to show the intro can change to look for 
 }
 
 // Replace the following lines with you own code
-echo $OUTPUT->heading('Yay! It works!');
 
+
+echo $OUTPUT->heading('Yay! It works!');
 // Finish the page
 echo $OUTPUT->footer();

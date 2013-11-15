@@ -36,31 +36,79 @@
 }
 
 .forum label {
-  background-image:url("http://localhost/moodle/mod/forum/pix/icon.png");
+  background-image:url("http://localhost/moodle/mod/forum/pix/icon.png"); /*forum*/
 }
 
 .assignment label {
-  background-image: url("http://localhost/moodle/mod/assignment/pix/icon.png");
+  background-image: url("http://localhost/moodle/mod/assignment/pix/icon.png"); /*assignment*/
 }
 
 .chat label {
-  background-image: url("http://localhost/moodle/mod/chat/pix/icon.png");
+  background-image: url("http://localhost/moodle/mod/chat/pix/icon.png");/*chat*/
 }
 
 .choice label {
-  background-image: url("http://localhost/moodle/mod/choice/pix/icon.png");
+  background-image: url("http://localhost/moodle/mod/choice/pix/icon.png");/*choice*/
 }
 
+.database label {
+  background-image: url("http://localhost/moodle/mod/data/pix/icon.png");/*database*/
+}
 
+.externalTool label {
+  background-image: url("http://localhost/moodle/mod/lti/pix/icon.png");/*externalTool*/
+}
+
+.glossary label {
+  background-image: url("http://localhost/moodle/mod/glossary/pix/icon.png");/*glossary*/
+}
 .lesson label {
-  background-image: url("http://localhost/moodle/mod/lesson/pix/icon.png");
+  background-image: url("http://localhost/moodle/mod/lesson/pix/icon.png");/*lesson*/
 }
 
 .quiz label {
-  background-image: url("http://localhost/moodle/mod/quiz/pix/icon.png");
+  background-image: url("http://localhost/moodle/mod/quiz/pix/icon.png");/*quiz*/
 }
 
+.scorm label {
+  background-image: url("http://localhost/moodle/mod/scorm/pix/icon.png");/*scorm*/
+}
 
+.survey label {
+  background-image: url("http://localhost/moodle/mod/survey/pix/icon.png");/*survey*/
+}
+
+.wiki label {
+  background-image: url("http://localhost/moodle/mod/wiki/pix/icon.png");/*wiki*/
+}
+
+.workshop label {
+  background-image: url("http://localhost/moodle/mod/workshop/pix/icon.png");/*workshop*/
+}
+
+.book label {
+  background-image: url("http://localhost/moodle/mod/book/pix/icon.png");/*book*/
+}
+
+.file label {
+  background-image: url("http://localhost/moodle/mod/resource/pix/icon.png");/*file*/
+}
+
+.ims label {
+  background-image: url("http://localhost/moodle/mod/imscp/pix/icon.png");/*ims*/
+}
+
+.label label {
+  background-image: url("http://localhost/moodle/mod/label/pix/icon.png");/*label*/
+}
+
+.page1 label {
+  background-image: url("http://localhost/moodle/mod/page/pix/icon.png");/*page*/
+}
+
+.url label {
+  background-image: url("http://localhost/moodle/mod/url/pix/icon.png");/*url*/
+}
 
 
 . choose-icon-  input : focus  +  label  { 
