@@ -96,12 +96,12 @@ class mod_iconicrep_mod_form extends moodleform_mod {
         $mform->addElement('html','</ Li>');
         
         $mform->addElement('html','<li class="choose-icon database">');
-        $mform->addElement('html','<input type="checkbox" name="choose-icons[]" id="database" value="database">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons[]" id="database" value="data">');
         $mform->addElement('html','<label for="database"> Database </ label>');
         $mform->addElement('html','</ Li>');
         
         $mform->addElement('html','<li class="choose-icon externalTool">');
-        $mform->addElement('html','<input type="checkbox" name="choose-icons[]" id="externalTool" value="externalTool">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons[]" id="externalTool" value="lti">');
         $mform->addElement('html','<label for="externalTool"> ExternalTool </ label>');
         $mform->addElement('html','</ Li>');
         
@@ -151,8 +151,8 @@ class mod_iconicrep_mod_form extends moodleform_mod {
         $mform->addElement('html','</ Li>');
        
         $mform->addElement('html','<li class="choose-icon ims">');
-        $mform->addElement('html','<input type="checkbox" name="choose-icons[]" id="ims" value="ims">');
-        $mform->addElement('html','<label for="ims"> IMS </ label>');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons[]" id="imscp" value="imscp">');
+        $mform->addElement('html','<label for="ims"> IMSCP </ label>');
         $mform->addElement('html','</ Li>');
         
         $mform->addElement('html','<li class="choose-icon label">');
