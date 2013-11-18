@@ -70,8 +70,16 @@ function iconicrep_add_instance(stdClass $iconicrep, mod_iconicrep_mod_form $mfo
     global $DB;
 
     $iconicrep->timecreated = time();
-
+    
+    foreach($_POST['choose-icons'] as $value)
+    {
+    	
+		$iconicrep->icon = $value;
+    	$DB->insert_record('iconicrep', $iconicrep);
+    	
+    }
     # You may have to add extra stuff in here #
+
 
     return $DB->insert_record('iconicrep', $iconicrep);
 }
