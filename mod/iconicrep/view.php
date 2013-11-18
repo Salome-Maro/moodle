@@ -70,7 +70,44 @@ if ($iconicrep->intro) { // Conditions to show the intro can change to look for 
     echo $OUTPUT->box(format_module_intro('iconicrep', $iconicrep, $cm->id), 'generalbox mod_introbox', 'iconicrepintro');
 }
 
-// Replace the following lines with you own code
+//Replace the following lines with you own code
+
+//database connections
+$hostname = "localhost";
+$user = "root";
+$pass = "";
+$database = "moodle";
+
+$connection = mysql_connect($hostname, $user, $pass) or die(mysql_error());
+mysql_select_db($database, $connection) or die(mysql_error());
+
+$name = format_string($iconicrep->name);
+$courseid =  format_string($course->id);
+
+
+
+$query = "SELECT * from mdl_iconicrep WHERE name ='$name'";
+$squery = mysql_query($query);
+
+if (!$squery) { // add this check.
+	die('Invalid query: ' . mysql_error());
+}
+
+while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {
+	echo $row['icon']. " ";
+	
+	$icon = "http://localhost/moodle/mod/".$row['icon']."/pix/"."icon.png";
+	$link = "http://localhost/moodle/mod/".$row['icon']."/index.php?id=".$courseid;
+?>
+<html>
+	<a href= "<?php echo $link ?>">
+	<img src="<?php echo $icon ?> " alt="HTML tutorial" width="32" height="32"></a>
+</html>
+
+<?php
+}
+
+
 
 
 echo $OUTPUT->heading('Yay! It works!');
