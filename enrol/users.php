@@ -50,7 +50,7 @@ if (optional_param('resetbutton', '', PARAM_RAW) !== '') {
 
 //Download button
 if (optional_param('downloadbutton', '', PARAM_RAW) !== '') {
-	redirect('download.php');
+	redirect('http://localhost/moodle/enrol/download.php?id=2');
 }
 
 $course = $DB->get_record('course', array('id'=>$id), '*', MUST_EXIST);
