@@ -650,7 +650,6 @@ $string['emptydragdropregion'] = 'empty region';
 $string['enable'] = 'Enable';
 $string['encryptedcode'] = 'Encrypted code';
 $string['english'] = 'English';
-$string['enrolleddownload'] = 'Download Enrolled Users List';
 $string['entercourse'] = 'Click to enter this course';
 $string['enteremail'] = 'Enter your email address';
 $string['enteremailaddress'] = 'Enter in your email address to reset your

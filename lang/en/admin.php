@@ -494,6 +494,7 @@ $string['enablestats'] = 'Enable statistics';
 $string['enabletrusttext'] = 'Enable trusted content';
 $string['enablewebservices'] = 'Enable web services';
 $string['enablewsdocumentation'] = 'Web services documentation';
+$string['enrolleddownload'] = 'Download Enrolled Users List';
 $string['enrolinstancedefaults'] = 'Enrolment instance defaults';
 $string['enrolinstancedefaults_desc'] = 'Default enrolment settings in new courses.';
 $string['enrolmultipleusers'] = 'Enrol the users';
