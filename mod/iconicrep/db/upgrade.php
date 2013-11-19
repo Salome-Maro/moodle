@@ -48,7 +48,7 @@ function xmldb_iconicrep_upgrade($oldversion) {
     // this comment lines once this file start handling proper
     // upgrade code.
 
-    if ($oldversion < 2013111500) {
+    if ($oldversion < 2013111800) {
 
         // Define table iconicrep to be created.
         $table = new xmldb_table('iconicrep');
@@ -70,7 +70,7 @@ function xmldb_iconicrep_upgrade($oldversion) {
         }
 
         // Iconicrep savepoint reached.
-        upgrade_mod_savepoint(true, 2013111500, 'iconicrep');
+        upgrade_mod_savepoint(true, 2013111800, 'iconicrep');
     }
     
 

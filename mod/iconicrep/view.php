@@ -72,6 +72,7 @@ if ($iconicrep->intro) { // Conditions to show the intro can change to look for 
 
 //Replace the following lines with you own code
 
+echo $OUTPUT->heading('Iconic Representative');
 //database connections
 $hostname = "localhost";
 $user = "root";
@@ -93,9 +94,7 @@ if (!$squery) { // add this check.
 	die('Invalid query: ' . mysql_error());
 }
 
-while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {
-	echo $row['icon']. " ";
-	
+while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {			
 	$icon = "http://localhost/moodle/mod/".$row['icon']."/pix/"."icon.png";
 	$link = "http://localhost/moodle/mod/".$row['icon']."/index.php?id=".$courseid;
 ?>
@@ -105,11 +104,23 @@ while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {
 </html>
 
 <?php
+
+$display = $row;
+switch ($row['icon'])
+	{
+		case 'data':
+			$display['icon'] = 'database'; break;
+		case 'lti':
+			$display['icon'] = 'external tool'; break;
+		case 'imscp':
+			$display['icon'] = 'IMS content package'; break;
+	}
+	echo $display['icon']. " ";
 }
 
 
 
 
-echo $OUTPUT->heading('Yay! It works!');
+
 // Finish the page
 echo $OUTPUT->footer();

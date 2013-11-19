@@ -100,10 +100,14 @@ function iconicrep_update_instance(stdClass $iconicrep, mod_iconicrep_mod_form $
 
     $iconicrep->timemodified = time();
     $iconicrep->id = $iconicrep->instance;
+    
+    
+    return true;
 
     # You may have to add extra stuff in here #
 
-    return $DB->update_record('iconicrep', $iconicrep);
+//     return $DB->update_record('iconicrep', $iconicrep);
+
 }
 
 /**
