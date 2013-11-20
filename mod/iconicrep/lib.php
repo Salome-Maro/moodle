@@ -31,6 +31,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+
 /** example constant */
 //define('iconicrep_ULTIMATE_ANSWER', 42);
 
@@ -70,7 +71,7 @@ function iconicrep_add_instance(stdClass $iconicrep, mod_iconicrep_mod_form $mfo
     global $DB;
 
     $iconicrep->timecreated = time();
-    
+     
     foreach($_POST['choose-icons'] as $value)
     {
     	
@@ -80,8 +81,7 @@ function iconicrep_add_instance(stdClass $iconicrep, mod_iconicrep_mod_form $mfo
     }
     # You may have to add extra stuff in here #
 
-
-    return $DB->insert_record('iconicrep', $iconicrep);
+	return $DB->insert_record('iconicrep', $iconicrep);
 }
 
 /**
@@ -101,12 +101,10 @@ function iconicrep_update_instance(stdClass $iconicrep, mod_iconicrep_mod_form $
     $iconicrep->timemodified = time();
     $iconicrep->id = $iconicrep->instance;
     
-    
-    return true;
 
     # You may have to add extra stuff in here #
 
-//     return $DB->update_record('iconicrep', $iconicrep);
+ return $DB->update_record('iconicrep', $iconicrep);
 
 }
 
@@ -133,6 +131,63 @@ function iconicrep_delete_instance($id) {
 
     return true;
 }
+
+/**
+ * Given a coursemodule object, this function returns the extra
+ * information needed to print this activity in various places.
+ * For this module we want to display a list of selected icons instead of the main module icon
+ *
+ * @param stdClass $coursemodule
+ * @return cached_cm_info info
+ */
+
+function iconicrep_get_coursemodule_info($cm) {
+	$info = new cached_cm_info();
+	
+	//database connections
+	$hostname = "localhost";
+	$user = "root";
+	$pass = "";
+	$database = "moodle";
+	
+	$connection = mysql_connect($hostname, $user, $pass) or die(mysql_error());
+	mysql_select_db($database, $connection) or die(mysql_error());
+	
+	$name = format_string($iconicrep->name);
+	$courseid =  format_string($course->id);
+	
+	
+	$query = "SELECT * from mdl_iconicrep WHERE name ='$name'";
+	$squery = mysql_query($query);
+	$n = mysql_num_rows($squery);
+
+	
+	if (!$squery) { // add this check.
+		die('Invalid query: ' . mysql_error());
+	}
+	
+		
+	$value = "";
+
+	$iconName = "";
+	while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {
+		$icon = "http://localhost/moodle/mod/".$row['icon']."/pix/"."icon.png";
+		$link = "http://localhost/moodle/mod/".$row['icon']."/index.php?id=".$courseid;
+		$value.= $row['icon']." ";
+		
+
+		$iconName.= '<a href= "'.$link.'">
+					<img src="'.$icon.'" alt="HTML tutorial" width="32" height="32"></a>';
+
+	}
+	$info->content = '<html>' 
+			.$iconName.'
+					</html>';
+
+	//$info->iconurl = "http://localhost/moodle/mod/chat/pix/icon.gif";
+	return $info;
+}
+
 
 /**
  * Returns a small object with summary information about what a
