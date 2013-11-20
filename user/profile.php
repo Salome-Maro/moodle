@@ -398,6 +398,8 @@ if (!empty($CFG->usetags)) {
         echo html_writer::tag('dd', $interests);
     }
 }
+//child's email
+echo '<b>Email </b>';
 
 if (!isset($hiddenfields['suspended'])) {
     if ($user->suspended) {

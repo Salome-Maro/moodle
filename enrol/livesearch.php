@@ -1,4 +1,5 @@
 <?php
+
 //database connections
 $hostname = "localhost";
 $user = "root";

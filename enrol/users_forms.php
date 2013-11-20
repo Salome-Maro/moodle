@@ -165,9 +165,7 @@ class enrol_users_filter_form
 	   $showResults =array( 'onkeyup' =>'liveSearch()', 'id'=>'qsearch');
        $mform->addElement('text','search', get_string('search'),$showResults);
        $mform->setType('search', PARAM_RAW);
-      // echo html::start_tag('ul', array('id'=>'searchResults2'));
-       //echo html::end_tag('ul');       
-             
+    
         
         // Filter by enrolment plugin type.
         $mform->addElement('select', 'ifilter', get_string('enrolmentinstances', 'enrol'),
