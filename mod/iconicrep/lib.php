@@ -66,6 +66,7 @@ function iconicrep_supports($feature) {
  * @param mod_iconicrep_mod_form $mform
  * @return int The id of the newly inserted iconicrep record
  */
+
 function iconicrep_add_instance(stdClass $iconicrep, mod_iconicrep_mod_form $mform = null) {
     global $DB;
 
@@ -78,10 +79,28 @@ function iconicrep_add_instance(stdClass $iconicrep, mod_iconicrep_mod_form $mfo
     	$DB->insert_record('iconicrep', $iconicrep);
     	
     }
+
+    //database connections
+    $hostname = "localhost";
+    $user = "root";
+    $pass = "";
+    $database = "moodle";
+    
+    $connection = mysql_connect($hostname, $user, $pass) or die(mysql_error());
+    mysql_select_db($database, $connection) or die(mysql_error());
+    
+    //Delete the last record
+    $query = "DELETE FROM mdl_iconicrep ORDER BY id DESC LIMIT 1";
+    $squery = mysql_query($query);
+
+    if (!$squery) { // add this check.
+    	die('Invalid query: ' . mysql_error());
+    }
+    
     # You may have to add extra stuff in here #
+//      return true;
 
-
-    return $DB->insert_record('iconicrep', $iconicrep);
+     return $DB->insert_record('iconicrep', $iconicrep);
 }
 
 /**
@@ -100,13 +119,11 @@ function iconicrep_update_instance(stdClass $iconicrep, mod_iconicrep_mod_form $
 
     $iconicrep->timemodified = time();
     $iconicrep->id = $iconicrep->instance;
-    
-    
-    return true;
+
 
     # You may have to add extra stuff in here #
 
-//     return $DB->update_record('iconicrep', $iconicrep);
+    return $DB->update_record('iconicrep', $iconicrep);
 
 }
 
