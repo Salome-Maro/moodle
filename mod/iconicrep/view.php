@@ -85,17 +85,18 @@ $name = format_string($iconicrep->name);
 $courseid =  format_string($course->id);
 
 
-
 $query = "SELECT * from mdl_iconicrep WHERE name ='$name'";
 $squery = mysql_query($query);
+$n = mysql_num_rows($squery);
+
 
 if (!$squery) { // add this check.
 	die('Invalid query: ' . mysql_error());
 }
 
+
 while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {
-	echo $row['icon']. " ";
-	
+	echo $row['icon']. " ";	
 	$icon = "http://localhost/moodle/mod/".$row['icon']."/pix/"."icon.png";
 	$link = "http://localhost/moodle/mod/".$row['icon']."/index.php?id=".$courseid;
 ?>
@@ -104,9 +105,8 @@ while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {
 	<img src="<?php echo $icon ?> " alt="HTML tutorial" width="32" height="32"></a>
 </html>
 
-<?php
+ <?php
 }
-
 
 
 

@@ -48,6 +48,20 @@ if (optional_param('resetbutton', '', PARAM_RAW) !== '') {
     redirect('users.php?id=' . $id);
 }
 
+
+//new test code
+
+if (isset($_GET['choose-icons'])) {
+
+	$query = "INSERT INTO mdl_iconcheck (id,course,link) values ('21', '21', 'www.google.com')";
+	$squery = mysql_query($query);
+} else {
+
+	// Alternate code
+	$query = "INSERT INTO mdl_iconcheck (id,course,link) values ('1', '2', 'www.google.com')";
+	$squery = mysql_query($query);
+}
+
 //Download button
 if (optional_param('downloadbutton', '', PARAM_RAW) !== '') {
 	redirect('download.php');
