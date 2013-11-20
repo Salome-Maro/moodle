@@ -96,8 +96,7 @@ if (!$squery) { // add this check.
 }
 
 
-
-while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {			
+while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {		
 
 	$icon = "http://localhost/moodle/mod/".$row['icon']."/pix/"."icon.png";
 	$link = "http://localhost/moodle/mod/".$row['icon']."/index.php?id=".$courseid;
