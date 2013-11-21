@@ -121,9 +121,16 @@ function iconicrep_update_instance(stdClass $iconicrep, mod_iconicrep_mod_form $
     $iconicrep->id = $iconicrep->instance;
 
     # You may have to add extra stuff in here #
+    
+    foreach($_POST['choose-icons'] as $value)
+    {
+    	 
+    	$iconicrep->icon = $value;
+    	$DB->update_record('iconicrep', $iconicrep);
+    	 
+    }
 
-
- return $DB->update_record('iconicrep', $iconicrep);
+ return true;
 
 }
 
@@ -172,10 +179,15 @@ function iconicrep_get_coursemodule_info($cm) {
 	$connection = mysql_connect($hostname, $user, $pass) or die(mysql_error());
 	mysql_select_db($database, $connection) or die(mysql_error());
 	
-	$name = format_string($iconicrep->name);
-	$courseid =  format_string($course->id);
+	$iconicrepid = $cm->instance;
+	$nameQuery = "SELECT * from mdl_iconicrep WHERE id = '$iconicrepid'";
+	$nameResult = mysql_query($nameQuery);
 	
-	
+	$row1 = mysql_fetch_array($nameResult);
+	$name = $row1['name'];
+	$courseid = $row1['course'];
+
+		
 	$query = "SELECT * from mdl_iconicrep WHERE name ='$name'";
 	$squery = mysql_query($query);
 	$n = mysql_num_rows($squery);
