@@ -209,6 +209,8 @@ function iconicrep_get_coursemodule_info($cm) {
 		$display = $row;
 		switch ($row['icon'])
 		{
+			case 'assign':
+				$display['icon'] = 'assignment'; break;
 			case 'data':
 				$display['icon'] = 'database'; break;
 			case 'lti':

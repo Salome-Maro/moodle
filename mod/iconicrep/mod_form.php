@@ -74,9 +74,9 @@ class mod_iconicrep_mod_form extends moodleform_mod {
         $mform->addElement('header', 'iconchoose', get_string('iconchoose', 'iconicrep'));
         
         $mform->addElement('html', '<ul class="choose-icons">');
-        $mform->addElement('html','<li class="choose-icon assignment">');
-        $mform->addElement('html','<input type="checkbox" name="choose-icons[]" id="assignment" value = "assignment">');
-        $mform->addElement('html','<label for="assignment"> Assignment </ label>');
+        $mform->addElement('html','<li class="choose-icon assign">');
+        $mform->addElement('html','<input type="checkbox" name="choose-icons[]" id="assign" value = "assign">');
+        $mform->addElement('html','<label for="assign"> Assignment </ label>');
         $mform->addElement('html','</ Li>');
         
                

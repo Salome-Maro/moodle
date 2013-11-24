@@ -104,6 +104,8 @@ while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {
 	$display = $row;
 	switch ($row['icon'])
 	{
+		case 'assign':
+			$display['icon'] = 'assignment'; break;
 		case 'data':
 			$display['icon'] = 'database'; break;
 		case 'lti':
