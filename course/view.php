@@ -284,5 +284,5 @@
 
     // Include course AJAX
     include_course_ajax($course, $modnamesused);
-
+    include "footer.php";
     echo $OUTPUT->footer();
