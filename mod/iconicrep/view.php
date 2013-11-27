@@ -95,23 +95,17 @@ if (!$squery) { // add this check.
 	die('Invalid query: ' . mysql_error());
 }
 
-
+// Show  the icon lists after editing the icon event
 while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {		
 
 	$icon = "http://localhost/moodle/mod/".$row['icon']."/pix/"."icon.png";
 	$link = "http://localhost/moodle/mod/".$row['icon']."/index.php?id=".$courseid;
-?>
-<html>
-	<a href= "<?php echo $link ?>">
-	<img src="<?php echo $icon ?> " alt="HTML tutorial" width="32" height="32"></a>
-</html>
-
-<?php
-
-
-$display = $row;
-switch ($row['icon'])
+	
+	$display = $row;
+	switch ($row['icon'])
 	{
+		case 'assign':
+			$display['icon'] = 'assignment'; break;
 		case 'data':
 			$display['icon'] = 'database'; break;
 		case 'lti':
@@ -119,8 +113,15 @@ switch ($row['icon'])
 		case 'imscp':
 			$display['icon'] = 'IMS content package'; break;
 	}
-	echo $display['icon']. " ";
+	
+?>
+<html>
+	<a href= "<?php echo $link ?>">
+	<img src="<?php echo $icon ?> " alt="HTML tutorial" width="32" height="32" Title="<?php echo $display['icon']?>"></a>
+</html>
 
+<?php
+echo $display['icon']. " ";
 }
 
 

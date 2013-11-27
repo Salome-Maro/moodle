@@ -206,9 +206,21 @@ function iconicrep_get_coursemodule_info($cm) {
 		$link = "http://localhost/moodle/mod/".$row['icon']."/index.php?id=".$courseid;
 		$value.= $row['icon']." ";
 		
-
+		$display = $row;
+		switch ($row['icon'])
+		{
+			case 'assign':
+				$display['icon'] = 'assignment'; break;
+			case 'data':
+				$display['icon'] = 'database'; break;
+			case 'lti':
+				$display['icon'] = 'external tool'; break;
+			case 'imscp':
+				$display['icon'] = 'IMS content package'; break;
+		}		
+// Show the icon list in course front page
 		$iconName.= '<a href= "'.$link.'">
-					<img src="'.$icon.'" alt="HTML tutorial" width="32" height="32"></a>';
+					<img src="'.$icon.'" alt="HTML tutorial" width="32" height="32" Title="'.$display['icon'].'"></a>';
 
 	}
 	$info->content = '<html>' 

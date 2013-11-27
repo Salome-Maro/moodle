@@ -39,8 +39,8 @@
   background-image:url("http://localhost/moodle/mod/forum/pix/icon.png"); /*forum*/
 }
 
-.assignment label {
-  background-image: url("http://localhost/moodle/mod/assignment/pix/icon.png"); /*assignment*/
+.assign label {
+  background-image: url("http://localhost/moodle/mod/assign/pix/icon.png"); /*assign*/
 }
 
 .chat label {
