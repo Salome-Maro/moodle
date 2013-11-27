@@ -1,4 +1,4 @@
 <html>
-<a title="Back to Top" href="#top">Back to Top</a>
+<a title="back to top" href="#top">Back to Top</a>
 </body>
 </html>
