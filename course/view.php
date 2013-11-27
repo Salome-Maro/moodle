@@ -283,6 +283,7 @@
     echo html_writer::end_tag('div');
 
     // Include course AJAX
+    include "footer.php";
     include_course_ajax($course, $modnamesused);
-
+  
     echo $OUTPUT->footer();
