@@ -293,7 +293,7 @@ if (isset($identityfields['email']) and ($currentuser
   or ($user->maildisplay == 2 and enrol_sharing_course($user, $USER)))) {
     echo html_writer::tag('dt', get_string('email'));
     echo html_writer::tag('dd', obfuscate_mailto($user->email, ''));
-}*/
+} */
 
 
 //Print email for users with admin and parent roles
@@ -302,11 +302,6 @@ if (isset($identityfields['email']) or $user->maildisplay == 2){
 	echo html_writer::tag('dd', obfuscate_mailto($user->email, ''));
 }
 
-/*
-//Added for parent role
-	echo html_writer::tag('dt', get_string('email'));
-	echo html_writer::tag('dd', obfuscate_mailto($user->email, ''));
-*/
 
 if ($user->url && !isset($hiddenfields['webpage'])) {
     $url = $user->url;
