@@ -95,9 +95,11 @@ if (!$squery) { // add this check.
 	die('Invalid query: ' . mysql_error());
 }
 
+$icon1 = " ";
 // Show  the icon lists after editing the icon event
 while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {		
-
+	if (($row['icon'] != $icon1)) // make sure empty icons do not show
+	{
 	$icon = "http://localhost/moodle/mod/".$row['icon']."/pix/"."icon.png";
 	$link = "http://localhost/moodle/mod/".$row['icon']."/index.php?id=".$courseid;
 	
@@ -122,6 +124,7 @@ while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {
 
 <?php
 echo $display['icon']. " ";
+	}
 }
 
 
