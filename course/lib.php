@@ -1961,17 +1961,17 @@ function course_get_cm_edit_actions(cm_info $mod, $indent = -1, $sr = null) {
     $actions = array();
 
     // AJAX edit title.
-    if ($mod->has_view() && $hasmanageactivities &&
-                (($mod->course == $COURSE->id && course_ajax_enabled($COURSE)) ||
-                 ($mod->course == SITEID && course_ajax_enabled($SITE)))) {
-        // we will not display link if we are on some other-course page (where we should not see this module anyway)
-        $actions['title'] = new action_menu_link_secondary(
-            new moodle_url($baseurl, array('update' => $mod->id)),
-            new pix_icon('t/editstring', $str->edittitle, 'moodle', array('class' => 'iconsmall visibleifjs', 'title' => '')),
-            $str->edittitle,
-            array('class' => 'editing_title', 'data-action' => 'edittitle')
-        );
-    }
+//     if ($mod->has_view() && $hasmanageactivities &&
+//                 (($mod->course == $COURSE->id && course_ajax_enabled($COURSE)) ||
+//                  ($mod->course == SITEID && course_ajax_enabled($SITE)))) {
+//         // we will not display link if we are on some other-course page (where we should not see this module anyway)
+//         $actions['title'] = new action_menu_link_secondary(
+//             new moodle_url($baseurl, array('update' => $mod->id)),
+//             new pix_icon('t/editstring', $str->edittitle, 'moodle', array('class' => 'iconsmall visibleifjs', 'title' => '')),
+//             $str->edittitle,
+//             array('class' => 'editing_title', 'data-action' => 'edittitle')
+//         );
+//    }
 
     // Indent.
     if ($hasmanageactivities) {
