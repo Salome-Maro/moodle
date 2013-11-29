@@ -119,14 +119,35 @@ function iconicrep_update_instance(stdClass $iconicrep, mod_iconicrep_mod_form $
 
     $iconicrep->timemodified = time();
     $iconicrep->id = $iconicrep->instance;
-
-    # You may have to add extra stuff in here #
+    $name = $iconicrep->name;   
     
+    $name = $iconicrep->name;
+    $icon = " ";
+
+    //database connections
+    $hostname = "localhost";
+    $user = "root";
+    $pass = "";
+    $database = "moodle";
+    
+    $connection = mysql_connect($hostname, $user, $pass) or die(mysql_error());
+    mysql_select_db($database, $connection) or die(mysql_error());
+
+    // Get rid of old icons
+    $query = "UPDATE mdl_iconicrep SET icon = '$icon' WHERE name = '$name'";
+    $result = mysql_query($query);
+    
+    if (!$result) { // add this check.
+    	die('Invalid query: ' . mysql_error());
+    }
+    
+    # You may have to add extra stuff in here #
+    // Insert new icons
     foreach($_POST['choose-icons'] as $value)
     {
     	 
     	$iconicrep->icon = $value;
-    	$DB->update_record('iconicrep', $iconicrep);
+    	$DB->insert_record('iconicrep', $iconicrep);
     	 
     }
 
@@ -201,7 +222,10 @@ function iconicrep_get_coursemodule_info($cm) {
 	$value = "";
 
 	$iconName = "";
+	$icon1 = " ";
 	while ($row = mysql_fetch_array($squery, MYSQL_BOTH)) {
+		if (($row['icon'] != $icon1)) // make sure empty icons do not show
+		{
 		$icon = "http://localhost/moodle/mod/".$row['icon']."/pix/"."icon.png";
 		$link = "http://localhost/moodle/mod/".$row['icon']."/index.php?id=".$courseid;
 		$value.= $row['icon']." ";
@@ -221,7 +245,7 @@ function iconicrep_get_coursemodule_info($cm) {
 // Show the icon list in course front page
 		$iconName.= '<a href= "'.$link.'">
 					<img src="'.$icon.'" alt="HTML tutorial" width="32" height="32" Title="'.$display['icon'].'"></a>';
-
+		}
 	}
 	$info->content = '<html>' 
 			.$iconName.'
