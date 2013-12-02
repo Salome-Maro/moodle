@@ -41,6 +41,27 @@ $toggle_type   = optional_param('toggle_type', 0, PARAM_ALPHANUM);
 
 $PAGE->set_url(new moodle_url('/grade/report/grader/index.php', array('id'=>$courseid)));
 
+
+?>
+        <html>
+        <head>
+        <script SRC='livesearch.js'></script>
+        </head>
+        <body>
+        <form id="quick-search" action="../search" method="post" style = "position:absolute; top:145px; left: 232px; z-index:1;" >
+        <label>Search</label>
+        <input type="text" name="searchbox" onkeyup = "liveSearch()" id="qsearch">
+        <ul id="searchResults">
+        </ul>
+        </form>
+        </body>
+        </html>
+<?php 
+
+        // Text search box. 
+	   
+    
+      
 /// basic access checks
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('nocourseid');
@@ -59,6 +80,7 @@ if (!isset($USER->grade_last_report)) {
     $USER->grade_last_report = array();
 }
 $USER->grade_last_report[$course->id] = 'grader';
+
 
 /// Build editing on/off buttons
 
@@ -168,6 +190,8 @@ if ($USER->gradeediting[$course->id] && ($report->get_pref('showquickfeedback') 
 } else {
     echo $reporthtml;
 }
+
+
 
 // prints paging bar at bottom for large pages
 if (!empty($studentsperpage) && $studentsperpage >= 20) {
