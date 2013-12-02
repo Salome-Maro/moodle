@@ -1,9 +1,4 @@
 <?php
-/*Download enrolled user list - get user data
- * 
- */
-//echo "download page: under construction";
-
 require('../config.php');
 require_once("$CFG->dirroot/enrol/locallib.php");
 require_once("$CFG->dirroot/enrol/users_forms.php");
@@ -20,27 +15,14 @@ require_login();
 admin_externalpage_setup('userbulk');
 require_capability('moodle/user:update', context_system::instance());
 
-$return = $CFG->wwwroot.'/'.$CFG->admin.'/user/user_bulk.php';
+//$return = $CFG->wwwroot.'/'.$CFG->admin.'/user/user_bulk.php';
 
 if ($format) {
 	$fields = array('id'        => 'id',
 			'username'  => 'username',
 			'email'     => 'email',
 			'firstname' => 'firstname',
-			'lastname'  => 'lastname',
-			'idnumber'  => 'idnumber',
-			'institution' => 'institution',
-			'department' => 'department',
-			'phone1'    => 'phone1',
-			'phone2'    => 'phone2',
-			'city'      => 'city',
-			'url'       => 'url',
-			'icq'       => 'icq',
-			'skype'     => 'skype',
-			'aim'       => 'aim',
-			'yahoo'     => 'yahoo',
-			'msn'       => 'msn',
-			'country'   => 'country');
+			'lastname'  => 'lastname');
 
 	if ($extrafields = $DB->get_records('course')) {
 		foreach ($extrafields as $n=>$v){
@@ -62,7 +44,7 @@ if ($format) {
 $table = 'mdl_user';
 	switch ($format) {
 		case 'csv' : exportMysqlToCsv($table);
-		case 'ods' : user_download_ods($fields);
+		//case 'ods' : user_download_ods($fields);
 		case 'xls' :
 			$sql_query = "SELECT firstname, lastname, email
 		FROM mdl_user u
@@ -111,7 +93,7 @@ echo $OUTPUT->heading(get_string('enrolleddownload', 'admin'));
 echo $OUTPUT->box_start();
 echo '<ul>';
 echo '<li><a href="download.php?format=csv">'.get_string('downloadtext').'</a></li>';
-echo '<li><a href="download.php?format=ods">'.get_string('downloadods').'</a></li>';
+//echo '<li><a href="download.php?format=ods">'.get_string('downloadods').'</a></li>';
 echo '<li><a href="download.php?format=xls">'.get_string('downloadexcel').'</a></li>';
 echo '</ul>';
 echo $OUTPUT->box_end();
