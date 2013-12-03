@@ -108,6 +108,80 @@ function xmldb_forum_upgrade($oldversion) {
         // Forum savepoint reached.
         upgrade_mod_savepoint(true, 2013071000, 'forum');
     }
+    
+    // Add a field for anonymous forum 
+    // 0 -- normal forum
+    // 1 -- anonymous forum
+    // 2 -- normal forum with anonymous posts allowed
+    if ($oldversion < 2013112700) {
+
+        // Define field displaywordcount to be added to forum.
+        $table = new xmldb_table('forum');
+        $field = new xmldb_field('anonymity', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '1');
+
+        // Conditionally launch add field displaywordcount.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Forum savepoint reached.
+        upgrade_mod_savepoint(true, 2013112700, 'forum');
+    }
+    
+    // Add a field for anonymous forum in the forum table
+    // 0 -- normal forum
+    // 1 -- anonymous forum
+    // 2 -- normal forum with anonymous posts allowed
+    if ($oldversion < 2013112700) {
+
+        // Define field displaywordcount to be added to forum.
+        $table = new xmldb_table('forum');
+        $field = new xmldb_field('anonymity', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '1');
+
+        // Conditionally launch add field displaywordcount.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Forum savepoint reached.
+        upgrade_mod_savepoint(true, 2013112700, 'forum');
+    }
+    
+    // Add a field for anonymous post in the forum_posts table 
+    // 0 -- non-anonymous post
+    // 1 -- anonymous post
+    if ($oldversion < 2013112800) {
+
+        // Define field displaywordcount to be added to forum.
+        $table = new xmldb_table('forum_posts');
+        $field = new xmldb_field('anonympost', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0');
+
+        // Conditionally launch add field displaywordcount.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Forum savepoint reached.
+        upgrade_mod_savepoint(true, 2013112800, 'forum');
+    }
+    
+    // Add a field for private reply to forum_posts 
+    // 0 -- non-rivate post
+    // 1 -- private post
+    if ($oldversion < 2013120203) {
+
+        // Define field displaywordcount to be added to forum.
+        $table = new xmldb_table('forum_posts');
+        $field = new xmldb_field('privatepost', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0');
+
+        // Conditionally launch add field displaywordcount.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Forum savepoint reached.
+        upgrade_mod_savepoint(true, 2013120203, 'forum');
+    }
 
     return true;
 }

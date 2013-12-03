@@ -211,6 +211,15 @@ $string['forumtype_help'] = 'There are 5 forum types:
 * Q and A forum - Students must first post their perspectives before viewing other students\' posts
 * Standard forum displayed in a blog-like format - An open forum where anyone can start a new discussion at any time, and in which discussion topics are displayed on one page with "Discuss this topic" links
 * Standard forum for general use - An open forum where anyone can start a new discussion at any time';
+$string['forumanonimity'] = 'Anonimity';
+$string['forumanonimity_help'] = 'There are 3 types of anonimity:
+    
+* Normal forum - No post can be anonymous
+* Anonymous forum - All posts are anonymous
+* Normal forum with anonymous posts allowed - Normally, posts are not anonymous, but users can decide to post anonymously';
+$string['normalforum'] = 'Normal forum';
+$string['anonymousforum'] = 'Anonymous forum';
+$string['normwithanonforum'] = 'Normal forum with anonymous posts allowed';
 $string['forum:viewallratings'] = 'View all raw ratings given by individuals';
 $string['forum:viewanyrating'] = 'View total ratings that anyone received';
 $string['forum:viewdiscussion'] = 'View discussions';
@@ -236,6 +245,8 @@ $string['lastpost'] = 'Last post';
 $string['learningforums'] = 'Learning forums';
 $string['longpost'] = 'Long post';
 $string['mailnow'] = 'Mail now';
+$string['anonympost'] = 'Post anonymously';
+$string['privatepost'] = 'Post privately';
 $string['manydiscussions'] = 'Discussions per page';
 $string['markalldread'] = 'Mark all posts in this discussion read.';
 $string['markallread'] = 'Mark all posts in this forum read.';

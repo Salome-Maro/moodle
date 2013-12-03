@@ -80,7 +80,7 @@ class mod_forum_post_form extends moodleform {
      * @return void
      */
     function definition() {
-        global $CFG, $OUTPUT;
+        global $CFG, $OUTPUT, $DB;
 
         $mform =& $this->_form;
 
@@ -143,6 +143,20 @@ class mod_forum_post_form extends moodleform {
 
         if (empty($post->id) && has_capability('moodle/course:manageactivities', $coursecontext)) { // hack alert
             $mform->addElement('checkbox', 'mailnow', get_string('mailnow', 'forum'));
+        }
+        
+        // If the forum allows for anonymous posting,
+        // create a check-box to choose if the post should be anonymous or not
+        if($forum->anonymity == 2){
+            $mform->addElement('checkbox', 'anonympost', get_string('anonympost', 'forum'));
+        }
+        
+        // If this is a reply, allow for private posting
+        // If the parent post is already private, don't show the private check-box, 
+        //      make the reply automatically private
+        $parentpost = $DB->get_record('forum_posts', array('id' => $post->parent));
+        if(!empty($post->parent) && $parentpost->privatepost == 0){
+            $mform->addElement('checkbox', 'privatepost', get_string('privatepost', 'forum'));
         }
 
         if (!empty($CFG->forum_enabletimedposts) && !$post->parent && has_capability('mod/forum:viewhiddentimedposts', $coursecontext)) { // hack alert

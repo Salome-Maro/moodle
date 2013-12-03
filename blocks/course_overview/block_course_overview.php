@@ -86,6 +86,7 @@ class block_course_overview extends block_base {
             $this->content->text .= $renderer->course_overview($sortedcourses, $overviews);
             $this->content->text .= $renderer->hidden_courses($totalcourses - count($sortedcourses));
         }
+        
 
         return $this->content;
     }

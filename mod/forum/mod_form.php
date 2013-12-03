@@ -53,6 +53,11 @@ class mod_forum_mod_form extends moodleform_mod {
         $mform->addElement('select', 'type', get_string('forumtype', 'forum'), $forumtypes);
         $mform->addHelpButton('type', 'forumtype', 'forum');
         $mform->setDefault('type', 'general');
+        
+        $forumanonimity = forum_get_forum_anonimity_types();
+        $mform->addElement('select', 'anonymity', get_string('forumanonimity', 'forum'), $forumanonimity);
+        $mform->addHelpButton('type', 'forumanonimity', 'forum');
+        $mform->setDefault('type', 'general');
 
         // Attachments and word count.
         $mform->addElement('header', 'attachmentswordcounthdr', get_string('attachmentswordcount', 'forum'));

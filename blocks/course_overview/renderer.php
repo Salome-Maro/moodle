@@ -81,14 +81,22 @@ class block_course_overview_renderer extends plugin_renderer_base {
             $moveurl = html_writer::link($moveurl, $movetofirsticon);
             $html .= html_writer::tag('div', $moveurl, array('class' => 'movehere'));
         }
-
+        
+        foreach ($courses as $key => $course) {
+            $coursenode = $this->page->navigation->find($course->id, navigation_node::TYPE_COURSE);
+            $thingnode = $coursenode->add('Training', new moodle_url('/a/link/if/you/want/one.php'));
+            $thingnode->make_active();
+        }
+        
         foreach ($courses as $key => $course) {
             // If moving course, then don't show course which needs to be moved.
             if ($ismovingcourse && ($course->id == $movingcourseid)) {
                 continue;
             }
+          
             $html .= $this->output->box_start('coursebox', "course-{$course->id}");
             $html .= html_writer::start_tag('div', array('class' => 'course_title'));
+            
             // If user is editing, then add move icons.
             if ($userediting && !$ismovingcourse) {
                 $moveicon = html_writer::empty_tag('img',
@@ -130,7 +138,7 @@ class block_course_overview_renderer extends plugin_renderer_base {
             if (isset($overviews[$course->id]) && !$ismovingcourse) {
                 $html .= $this->activity_display($course->id, $overviews[$course->id]);
             }
-
+            
             $html .= $this->output->box('', 'flush');
             $html .= $this->output->box_end();
             $courseordernumber++;
