@@ -14,15 +14,26 @@ class block_todolist extends block_base {
     	$this->content         =  new stdClass;
     	$this->content->text   = '
     
-    	<html>
+<html>
     	<head>
         <script SRC="todolist.js"></script>
         </head>
         <body>
+    	<p id="demo1"> What is next? </p>
+    	<p id="demo">  </p>
         <form id="todolist" action="../admin/index.php" method="post">
-        <input type = "text" name="todolist" id="todolist">
+        <input type = "text" name="todolist" id="todo">
         <input type = "button" onclick = "add_todolist()" value = "PIN">
         
+    	<script>
+    			function add_todolist(){
+				var url = "todolist.php";
+    			var todotext = document.getElementById("todo").value;
+    			document.getElementById("demo").innerHTML = todotext;
+    			document.getElementById("todo").value = "";
+				http.open("POST", url, true);	
+				}
+    	</script>
         </form>
         </body>
         </html> 
