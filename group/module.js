@@ -6,6 +6,9 @@ M.core_group = {
     hoveroverlay : null
 };
 
+
+
+
 M.core_group.init_hover_events = function(Y, events) {
     // Prepare the overlay if it hasn't already been created
     this.hoveroverlay = this.hoveroverlay || (function(){
