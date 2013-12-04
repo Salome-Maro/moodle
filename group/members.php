@@ -31,6 +31,8 @@ require_once($CFG->libdir . '/filelib.php');
 $groupid = required_param('group', PARAM_INT);
 $cancel  = optional_param('cancel', false, PARAM_BOOL);
 
+$order= optional_param('order', 0, PARAM_INT);
+
 $group = $DB->get_record('groups', array('id'=>$groupid), '*', MUST_EXIST);
 $course = $DB->get_record('course', array('id'=>$group->courseid), '*', MUST_EXIST);
 
@@ -41,14 +43,18 @@ require_login($course);
 $context = context_course::instance($course->id);
 require_capability('moodle/course:managegroups', $context);
 
-$returnurl = $CFG->wwwroot.'/group/index.php?id='.$course->id.'&group='.$group->id;
+if(empty($order)){
+    $order = 0;
+}
+
+$returnurl = $CFG->wwwroot.'/group/index.php?id='.$course->id.'&group='.$group->id.'&order='.$order;
 
 if ($cancel) {
     redirect($returnurl);
 }
 
-$groupmembersselector = new group_members_selector('removeselect', array('groupid' => $groupid, 'courseid' => $course->id));
-$potentialmembersselector = new group_non_members_selector('addselect', array('groupid' => $groupid, 'courseid' => $course->id));
+$groupmembersselector = new group_members_selector('removeselect', array('groupid' => $groupid, 'courseid' => $course->id, 'order' => $order));
+$potentialmembersselector = new group_non_members_selector('addselect', array('groupid' => $groupid, 'courseid' => $course->id, 'order' => $order));
 
 if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
     $userstoadd = $potentialmembersselector->get_selected_users();
@@ -119,16 +125,74 @@ $contentcell->text = format_text($group->description, $group->descriptionformat,
 $groupinfotable->data[] = new html_table_row(array($picturecell, $contentcell));
 echo html_writer::table($groupinfotable);
 
+function reloadthispage($order){
+    new moodle_url('/group/members.php', array('id' => $course->id, 'group' => $group->id, 'order' => $order));
+}
+function sortbyfirstname()
+{
+     global $DB;
+    list($membersidsclause, $params) = $DB->get_in_or_equal($potentialmembersids, SQL_PARAMS_NAMED, 'pm');
+   $sql = "SELECT u.id, u.firstname AS userid, g.* FROM {user} u JOIN {groups_members} gm ON u.id = gm.userid JOIN {groups} g ON gm.groupid = g.id WHERE u.id $membersidsclause AND g.courseid = :courseid  ORDER BY u.firstname";
+   $result = mysql_query($sql);
+   
+   if (!$result)
+   {
+       die('Invalid query'.mysql_errno());
+   }
+   while ($row = mysql_fetch_array($result))
+       {
+           $name = $row[ 'firstname'];
+           echo $name;
+       }
+       
+       if ($_GET['sort' == 'firstname'])
+       {
+           $sql .= "ORDER BY u.firstname";
+           $orderBy = array('firstname');
+           $order = 'firstname';    
+          if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
+          $order = $_GET['orderBy'];
+}
+ 
+       }
+            
+}
 /// Print the editing form
 ?>
 
-<div id="addmembersform">
+<div id="addmembersform" >
+   
     <form id="assignform" method="post" action="<?php echo $CFG->wwwroot; ?>/group/members.php?group=<?php echo $groupid; ?>">
-    <div>
+    <div>        
     <input type="hidden" name="sesskey" value="<?php p(sesskey()); ?>" />
 
     <table class="generaltable generalbox groupmanagementtable boxaligncenter" summary="">
-    <tr>
+        
+    <tr>     
+         <tr><td colspan="10" id='backcell'>
+         <tr>     
+              <p style="color: black; font-size: 10pt; text-align: center; font-weight:bold;">Sort By</p>                                
+              <div style=" float: top; display:inline">
+         <form style=" display: inline;"name="frm2" method="post" action="<?php echo $CFG->wwwroot; ?>/group/members.php?group=<?php echo $groupid; ?>&order=0">
+            <input type="submit" align="right" name="sortbylastname"  value="<?php print_string('lastname', 'group'); ?>" />
+        </form>         
+               </div>   
+        <div style="float: left; display:inline"> 
+        <form style=" display: inline; margin-left:455px;"name="frm3" method="post" action="<?php echo $CFG->wwwroot; ?>/group/members.php?group=<?php echo $groupid; ?>&order=2">
+            <input type="submit" name="sortbyemail" style="margin-left:5px;" value="<?php print_string('email', 'group'); ?>" />
+        </form> 
+           </div> 
+          <div style="float: left; display: inline">    
+         <form style=" display: inline;"name="frm1" method="post" action="<?php echo $CFG->wwwroot; ?>/group/members.php?group=<?php echo $groupid; ?>&order=1">
+            <input type="submit" name="sortbyfirstname" value="<?php print_string('firstname', 'group'); ?>" />
+        </form> 
+         </div>
+           </div>
+            
+     
+    </td></tr> 
+    </tr> 
+      
       <td id='existingcell'>
           <p>
             <label for="removeselect"><?php print_string('groupmembers', 'group'); ?></label>
@@ -155,9 +219,13 @@ echo html_writer::table($groupinfotable);
     <tr><td colspan="3" id='backcell'>
         <input type="submit" name="cancel" value="<?php print_string('backtogroups', 'group'); ?>" />
     </td></tr>
+    </form>
+      
+     
+    
     </table>
     </div>
-    </form>
+    
 </div>
 
 <?php

@@ -627,6 +627,7 @@ abstract class user_selector_base {
 abstract class groups_user_selector_base extends user_selector_base {
     protected $groupid;
     protected $courseid;
+    protected $order;
 
     /**
      * @param string $name control name
@@ -638,6 +639,7 @@ abstract class groups_user_selector_base extends user_selector_base {
         parent::__construct($name, $options);
         $this->groupid = $options['groupid'];
         $this->courseid = $options['courseid'];
+        $this->order = $options['order'];
         require_once($CFG->dirroot . '/group/lib.php');
     }
 
@@ -745,6 +747,12 @@ class group_non_members_selector extends groups_user_selector_base {
                     JOIN {groups_members} gm ON u.id = gm.userid
                     JOIN {groups} g ON gm.groupid = g.id
                     WHERE u.id $membersidsclause AND g.courseid = :courseid ";
+            if($this->order == 1){
+                $sql = $sql."ORDER BY u.firstname";
+            }
+            if($this->order == 2){
+                $sql = $sql."ORDER BY SUBSTRING_INDEX(u.email,'@',1) ASC";
+            }
             $params['courseid'] = $courseid;
             $rs = $DB->get_recordset_sql($sql, $params);
             foreach ($rs as $usergroup) {
@@ -804,8 +812,17 @@ class group_non_members_selector extends groups_user_selector_base {
                         AND gm.id IS NULL
                         AND $searchcondition";
 
-        list($sort, $sortparams) = users_order_by_sql('u', $search, $this->accesscontext);
-        $orderby = ' ORDER BY ' . $sort;
+        //list($sort, $sortparams) = users_order_by_sql('u', $search, $this->accesscontext);
+        //$orderby = ' ORDER BY ' . $sort;
+        
+        // Ordering done based on the global variable $order which is set in members.php
+        $orderby = ' ORDER BY u.lastname ';
+        if($this->order == 1){
+            $orderby = ' ORDER BY u.firstname ';
+        }
+        if($this->order == 2){
+            $orderby = ' ORDER BY u.email ';
+        }
 
         $params = array_merge($searchparams, $roleparams, $enrolparams, $relatedctxparams);
         $params['courseid'] = $this->courseid;
@@ -818,7 +835,8 @@ class group_non_members_selector extends groups_user_selector_base {
             }
         }
 
-        $rs = $DB->get_recordset_sql("$fields $sql $orderby", array_merge($params, $sortparams));
+        //$rs = $DB->get_recordset_sql("$fields $sql $orderby", array_merge($params, $sortparams));
+        $rs = $DB->get_recordset_sql("$fields $sql $orderby", $params);
         $roles =  groups_calculate_role_people($rs, $context);
 
         //don't hold onto user IDs if we're doing validation
