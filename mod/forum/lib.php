@@ -4333,6 +4333,12 @@ function forum_add_new_post($post, $mform, &$message) {
     $DB->set_field("forum_discussions", "timemodified", $post->modified, array("id" => $post->discussion));
     $DB->set_field("forum_discussions", "usermodified", $post->userid, array("id" => $post->discussion));
     
+    // If this is a reply in the anonymous forum, set the reply as anonymous
+    if($forum->anonymity == 1){
+        $post->anonympost = 1;
+        $DB->set_field('forum_posts', 'anonympost', $post->anonympost, array('id' => $post->id));
+    }
+    
     // If this is a reply to an private reply, make it private as well
     $parentpost = $DB->get_record('forum_posts', array('id' => $post->parent));
     if($parentpost->privatepost == 1){
