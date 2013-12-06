@@ -54,7 +54,7 @@ $string['assignmentoptions'] = 'Assignment options';
 $string['assignrolenameincontext'] = 'Assign role \'{$a->role}\' in {$a->context}';
 $string['assignrole'] = 'Assign role';
 $string['assignroles'] = 'Assign roles';
-$string['assignroles_help'] = '<hr><p>By assigning a role to a user in a context, you are granting them the permissions contained in that role, for the current context and all lower contexts. For example, if a user is assigned the role of student in a course, they will also have the role of student for all activities and blocks within the course.</p><br><a href="helpmoodle.html">Parent permission setup</a>';
+$string['assignroles_help'] = '<hr><p>By assigning a role to a user in a context, you are granting them the permissions contained in that role, for the current context and all lower contexts. For example, if a user is assigned the role of student in a course, they will also have the role of student for all activities and blocks within the course.</p><br><a href="helpmoodle.html" target="_blank">Parent permission setup</a>';
 $string['assignroles_link'] = 'admin/roles/assign';
 $string['assignrolesin'] = 'Assign roles in {$a}';
 $string['assignrolesrelativetothisuser'] = 'Assign roles relative to this user';

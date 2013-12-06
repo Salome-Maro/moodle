@@ -46,46 +46,20 @@ $PAGE->set_url(new moodle_url('/grade/report/grader/index.php', array('id'=>$cou
         <html>
         <head>
         <script SRC='livesearch.js'></script>
+        <script SRC='showuser.js'></script>
         </head>
+        
         <body>
         <form id="quick-search" action="../search" method="post" style = "position:absolute; top:145px; left: 232px; z-index:1;" >
         <label>Search</label>
         <input type="text" name="searchbox" onkeyup = "liveSearch()" id="qsearch">
         <ul id="searchResults">
         </ul>
-        <button onclick= "showuser()"> Search</button>
-        </form>
+        <!--<button onclick= "showUser()"> Search</button>--->
+        </form>      
         </body>
         </html>
-<?php 
-
-        // Text search box. 
-/*        
-$renderer = $PAGE->get_renderer('core_enrol');
-$userdetails = array (
-		'picture' => false,
-		'firstname' => get_string('firstname'),
-		'lastname' => get_string('lastname'),
-);
-$extrafields = get_extra_user_fields($context);
-foreach ($extrafields as $field) {
-	$userdetails[$field] = get_user_field_name($field);
-}
-
-$fields = array(
-		'userdetails' => $userdetails,
-		'lastseen' => get_string('lastaccess'),
-		'role' => get_string('roles', 'role'),
-		'group' => get_string('groups', 'group'),
-		'enrol' => get_string('enrolmentinstances', 'enrol')
-);
-
-$filterform = new enrol_users_filter_form('users.php', array('manager' => $manager, 'id' => $id),
-		'get', '', array('id' => 'filterform'));
-$filterform->set_data(array('search' => $search, 'ifilter' => $filter, 'role' => $role));
-*/
-	   
-    
+<?php     
       
 /// basic access checks
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
